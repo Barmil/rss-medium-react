@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 5%;
+  box-sizing: border-box;
+}
+
+.loading {
+  animation: App-logo-spin infinite 5s linear;
+  height: 40px;
+  width: 40px;
+  opacity: 1;
+  transition: opacity 1s max-width 1s;
+}
+
+.App-header {
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  transition: margin 1s;
+}
+
+.App-header.streched{
+  margin-top: 250px;
+}
+
+.App-intro {
+  width: 100%;
+  max-width: 1500px;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.hidden {
+  opacity: 0;
+  max-width: 0;
+}

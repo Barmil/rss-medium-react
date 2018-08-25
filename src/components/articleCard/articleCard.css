@@ -1,0 +1,23 @@
+.article-card {
+    max-width: 400px;
+    display: flex;
+    flex-flow: column;
+}
+
+.article-card-media {
+    height: 250px;
+    object-fit: cover;
+}
+
+.article-card-content {
+    flex: 1;
+}
+
+.article-card-actions {
+    display: flex;
+    flex-flow: row-reverse;
+}
+
+.article-card-subheading{
+    text-align: left;
+}

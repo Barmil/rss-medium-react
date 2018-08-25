@@ -1,0 +1,26 @@
+
+html:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  background-image: url('https://collinstours.ca/wp-content/uploads/2016/04/times1.jpg');
+  /* background-image: url('http://verdewall.com/wp-content/uploads/2017/05/City-Background.jpg'); */
+  width: 110%;
+  height: 110%;
+  filter: blur(5px);
+  background-repeat:no-repeat;
+  background-size:cover;
+  opacity: 0.8;
+}
+
+html {
+  
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
