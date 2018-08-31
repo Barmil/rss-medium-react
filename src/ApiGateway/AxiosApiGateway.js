@@ -1,8 +1,7 @@
 import axios from 'axios';
 import xmlParser from 'xml-js';
 import * as HtmlJsonParser from './HtmlJsonParser'
-const mediumUrl = "medium.com/feed/" 
-const mediumImage = "https://cdn-images-1.medium.com/proxy/1*TGH72Nnw24QL3iV9IOm4VA.png"
+const mediumUrl = "medium.com/feed/"
 
 export const ResponseStatuses = {
     Ok: 200,
@@ -14,7 +13,7 @@ export async function getMediumFeedArticles(username, callback){
     try {
         const requestUrl = wrapUrlWithAllowCorsProxy(`${mediumUrl}${username}`)
         const response = await axios.get(requestUrl, {
-            timeout: 5000,
+            timeout: 30000,
             count: null,
             headers: {
                 Accept: 'application/rss+xml'
@@ -59,13 +58,23 @@ function mapArticlesResponse(responseData){
         const text = descriptionElemets.filter(x=> x.node === 'text').map(x=> x.text);
         return {
             title: article.title._cdata,
-            imageUrl: (!image || !image.attr || !image.attr.src) ? mediumImage: image.attr.src,
+            imageUrl: (isValidImage(image)) ? image.attr.src: undefined,
             description: text,
             creator: article['dc:creator']._cdata,
             publicationDate: article.pubDate._text,
             link: article.link._text,
         };
     });
+}
+
+function isValidImage(image)
+{
+    if(!image || !image.attr || !image.attr.src ) {
+        return false;
+    }
+
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    return allowedExtensions.test(image.attr.src);
 }
 
 function wrapUrlWithAllowCorsProxy(url){

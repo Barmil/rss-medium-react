@@ -5,15 +5,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import newsPpaper from '../../resources/images/newsPaper.svg';
+import newsPpaperImage from '../../resources/images/newsPaper.svg';
 import './articleCard.css'
 
 const articleCard = ({title, imageUrl, link, creator, publicationDate}) => {
-  var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-  const imageIsValid =  allowedExtensions.test(imageUrl);
-
   return (<Card className="article-card">
-  <CardMedia className="article-card-media" image={imageIsValid? imageUrl: newsPpaper} title={title}/>
+  <CardMedia className="article-card-media" image={imageUrl? imageUrl: newsPpaperImage} title={title}/>
     <CardContent className="article-card-content">
       <Typography gutterBottom variant="headline" component="h2">
       {title}
