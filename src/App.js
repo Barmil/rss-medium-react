@@ -4,6 +4,7 @@ import UsernameInput from './components/usernameInput';
 import ArticlesList from './components/articlesList'
 import ErrorComponent from './components/error';
 import ClassNames from 'classnames';
+import LocalStorageProvider from './localStorageProvider';
 import {getMediumFeedArticles, ResponseStatuses} from './ApiGateway/AxiosApiGateway';
 
 class App extends Component {
@@ -18,45 +19,28 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.hydrateStateWithLocalStorage();
+    const savedState = LocalStorageProvider.hydrateStateWithLocalStorage(this.state);
+    this.setState(savedState)
 
     window.addEventListener(
       "beforeunload",
-      this.saveStateToLocalStorage.bind(this)
+      this.SaveCurrrentState
     );
   }
 
   componentWillUnmount() {
     window.removeEventListener(
       "beforeunload",
-      this.saveStateToLocalStorage.bind(this)
+      this.SaveCurrrentState
     );
 
-    this.saveStateToLocalStorage();
+    this.SaveCurrrentState();
   }
 
-  hydrateStateWithLocalStorage() {
-    for (let key in this.state) {
-      if (localStorage.hasOwnProperty(key)) {
-        let value = localStorage.getItem(key);
-
-        try {
-          value = JSON.parse(value);
-          this.setState({ [key]: value });
-        } catch (e) {
-          // handle empty string
-          this.setState({ [key]: value });
-        }
-      }
-    }
+  SaveCurrrentState = () => {
+    LocalStorageProvider.saveStateToLocalStorage(this.state)
   }
-
-  saveStateToLocalStorage() {
-    for (let key in this.state) {
-      localStorage.setItem(key, JSON.stringify(this.state[key]));
-    }
-  }
-
+  
   usernameInputChanged = (event) => {
     var username = event.target.value;
     const usernameIsValid = this.usernameValidation(username);
