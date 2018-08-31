@@ -16,10 +16,9 @@ const usernameInput = ({username, onUsernameInputChanged, onClickFetch, isLoadin
     </Tooltip>}
   </InputAdornment>);
 
-  return ([<FormControl key="input"
-                        fullWidth 
-                        className="User-name-input" 
-                        variant="extendedFab"
+  return ([<FormControl fullWidth className="User-name-input" 
+                        variant="extendedFab" error
+                        key="search-input-control"
                         onKeyPress={ event => {if(isValid && !isLoading && event.key === 'Enter') onClickFetch()}}>
       <Input
       id="adornment-amount"
@@ -30,14 +29,15 @@ const usernameInput = ({username, onUsernameInputChanged, onClickFetch, isLoadin
       startAdornment={<InputAdornment position="start">medium.com/feed/</InputAdornment>}
       endAdornment={validationAdornment}      />
     </FormControl>,
-    <Button key="button"
-            className="fetch-button" 
+    <Button className="fetch-button" 
+            key="search-button-control"
             variant="extendedFab"
             color="secondary"
             disabled = {isLoading || !isValid || !username}
             onClick={onClickFetch}>
       { !isLoading? "Fetch" : "Loading"}
       <img className={ClassNames("loading", { "hidden": !isLoading })} src={LoadingImage} alt="react logo" />
+      
   </Button>])
 }
 
