@@ -5,7 +5,7 @@ html:before {
   top: -20px;
   right: -20px;
   z-index: -1;
-  background-image: url('./resources/images/newYourk.jpg');
+  background-image: url('./resources/images/newYork.jpg');
   width: 110%;
   height: 110%;
   filter: blur(5px);
